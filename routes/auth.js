@@ -12,7 +12,23 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-	axios.post("http://localhost:3000/users");
+	axios
+		.post("http://localhost:3000/users", {
+			email: req.body.email,
+			password: req.body.password,
+		})
+		.then((response) => console.log(response))
+		.catch((err) => console.log(err));
+});
+
+router.post("/register", (req, res) => {
+	axios
+		.post("http://localhost:3000/users", {
+			email: req.body.email,
+			password: req.body.password,
+		})
+		.then((response) => console.log(response))
+		.catch((err) => console.log(err));
 });
 
 module.exports = router;

@@ -1,0 +1,30 @@
+<%- include('layouts/header.ejs') %>
+<div class="grid grid-cols-2 container justify-items-center my-auto">
+	<div class="w-96 m-44"><img src="images/pana.png" alt="" /></div>
+	<div class="">
+		<h1 class="text-center text-4xl m-16 font-semibold">Register</h1>
+		<form action="" method="post" class="grid grid-rows-2 justify-items-center">
+			<input
+				type="text"
+				name="email"
+				class="w-64 h-12 pl-10 my-12 text-xl font-semibold rounded-lg shadow-md shadow-blue-300"
+				id="email"
+				placeholder="Email"
+			/>
+			<input
+				type="password"
+				name="password"
+				class="w-64 h-12 pl-10 mb-20 text-xl font-semibold rounded-lg shadow-md shadow-blue-300"
+				id="password"
+				placeholder="Password"
+			/>
+			<button
+				type="submit"
+				class="w-44 h-12 bg-blue-800 font-semibold text-center text-xl rounded-lg shadow-md shadow-blue-300 active:bg-blue-400 hover:shadow-blue-500 text-white"
+			>
+				Register
+			</button>
+		</form>
+	</div>
+</div>
+<%- include('layouts/closer') %>
