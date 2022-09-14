@@ -1,0 +1,104 @@
+<%- include('layouts/header.ejs') %>
+
+<div class="container flex flex-col items-center w-screen mx-auto">
+	<!-- logo -->
+	<%- include('layouts/logo.ejs') %>
+
+	<!-- header search -->
+	<%- include('layouts/search.ejs') %>
+
+	<!-- card warning adult content will show up if adult condition is true -->
+	<% if (data.adult) { %> <%- include('layouts/alert.ejs') %> <% } %>
+	<div class="container flex flex-col justify-center mx-auto">
+		<!-- movie image -->
+		<img
+			src="<%= uriImg %><%= data.backdrop_path===null?data.poster_path:data.backdrop_path %> "
+			alt="<%= data.original_title %> "
+			class="w-11/12 rounded-md flex-row mb-5 self-center"
+		/>
+
+		<!-- title, status, vote -->
+		<div class="flex flex-row justify-between mx-8 md:mx-20 mb-5">
+			<h2 class="font-semibold text-4xl"><%= data.title %></h2>
+			<div class="flex flex-col items-center">
+				<div class="rounded-lg bg-red-400 px-2 py-1">
+					<p class="font-semibold text-lg text-center text-white"><%= data.status %></p>
+				</div>
+				<div>
+					<p class="col-start-4 col-end-5 text-center font-semibold text-lg">
+						<%= data.vote_average %>/<%= data.vote_count %>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Genre list -->
+		<div class="flex flex-row mx-8 md:mx-20 mb-5">
+			<% for( let i = 0; i < data.genres.length; i++ ) { %>
+			<div class="w-fit rounded-lg bg-red-500 mr-2">
+				<p class="font-semibold text-center text-sm my-1 mx-2 text-white">
+					<%= data.genres[i].name %>
+				</p>
+			</div>
+			<% } %>
+		</div>
+
+		<!-- overview -->
+		<div class="flex flex-col mx-8 md:mx-20 mb-5">
+			<div class="bg-blue-500 w-28 rounded-lg mb-3">
+				<p class="text-center my-1 text-xl font-semibold text-white">Overview</p>
+			</div>
+			<p class="text-justify text-lg"><%= data.overview %></p>
+		</div>
+
+		<!-- detail -->
+		<div class="flex flex-col mx-8 md:mx-20 mb-5">
+			<div class="bg-blue-500 w-28 rounded-lg mb-3">
+				<p class="text-center my-1 text-xl font-semibold text-white">Detail</p>
+			</div>
+			<ul class="text-lg font-medium">
+				<li>Website : <%= data.homepage %></li>
+				<li>Release Date : <%= data.release_date %></li>
+				<li>
+					Language : <% for( let i = 0; i < data.spoken_languages.length; i++ ) { %>
+					<%=data.spoken_languages[i].english_name %><% if (data.spoken_languages.length>1){%>
+					<span>,</span>
+					<% } %> <% } %>
+				</li>
+			</ul>
+		</div>
+
+		<!-- production -->
+		<div class="flex flex-col mx-8 md:mx-20 mb-5">
+			<div class="bg-blue-500 w-36 rounded-lg mb-3">
+				<p class="text-center my-1 text-xl font-semibold text-white">Production By</p>
+			</div>
+			<!-- card companies -->
+			<div class="mb-5 mx-auto">
+				<ul class="flex flex-col md:flex-row md:overflow-x-auto">
+					<% for( let i = 0; i < data.production_companies.length; i++ ) { %>
+					<li class="mr-3 my-2 box-border w-40 p-2 rounded-lg shadow-md">
+						<img
+							src="<%= uriImg %><%= data.production_companies[i].logo_path %>"
+							alt="<%= data.production_companies[i].name %> "
+							class="my-auto w-fit"
+						/>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+
+			<!-- card production countries -->
+			<div class="mx-auto">
+				<ul class="flex flex-col md:flex-row md:overflow-x-auto">
+					<% for( let i = 0; i < data.production_countries.length; i++ ) { %>
+					<li class="mr-3 my-2 box-border w-40 p-2 rounded-lg shadow-md text-center">
+						<%= data.production_countries[i].iso_3166_1 %>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<%- include('layouts/closer.ejs') %>
